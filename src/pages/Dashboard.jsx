@@ -1,12 +1,31 @@
-import { Container } from "@mui/material";
-import Cards from "../components/blog/Cards";
+import { useSelector } from "react-redux";
+import BlogCard from "../components/blog/BlogCard";
+import useBlogCall from "../hooks/useBlogCall";
+import { useEffect } from "react";
+import { Grid } from "@mui/material";
 
- function Dashboard() {
- 
+const Dashboard = () => {
+  const { getBlogData } = useBlogCall();
+  const { blogs } = useSelector((state) => state.blog);
+
+  console.log(blogs);
+  useEffect(() => {
+    getBlogData("blogs");
+  }, []);
   return (
-<Container sx={{marginTop:'50px'}}>
-    <Cards/>
-    </Container>
+    <Grid
+      container
+      spacing={2}
+      align="center"
+      sx={{ minHeight: "90vh", display: "flex", alignItems: "center" }}
+    >
+      {blogs?.map((blog)=>(
+        <Grid item xs={12} sm={6} md={4} lg={3} key={blog.id}>
+              <BlogCard blog={blog} />
+        </Grid>
+      ))}     
+    </Grid>
   );
-}
-export default Dashboard
+};
+
+export default Dashboard;
