@@ -27,7 +27,7 @@ const useAuthCall =() =>{
         dispatch(fetchStart())
         try {
             await axios.post(`${BASE_URL}users/auth/logout/`)
-            dispatch(logoutSuccess)
+            dispatch(logoutSuccess())
             toastSuccessNotify("Logout performed")
             navigate("/")
         } catch (error) {

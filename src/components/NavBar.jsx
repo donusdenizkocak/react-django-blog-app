@@ -212,7 +212,7 @@ function NavBar() {
                 ? settings.map(({ name, url }) =>
                     name === "Logout" ? (
                       <MenuItem key={name} onClick={handleCloseUserMenu}>
-                        <Button component={Link} to={url} onClick={logout}>
+                        <Button  onClick={logout}>
                           {name}
                         </Button>
                       </MenuItem>

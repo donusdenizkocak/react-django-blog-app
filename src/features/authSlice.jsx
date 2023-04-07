@@ -16,12 +16,12 @@ reducers:{
       loginSuccess: (state,{payload}) =>{
                state.loading = false
                state.currentUser= payload?.user
-               state.token=null
+               state.token=payload?.key
             },
        logoutSuccess: (state,{payload}) =>{
                 state.loading = false
                 state.currentUser= null
-                state.token= payload.key
+                state.token= null
              },
          registerSuccess:(state,{payload})=>{
             state.loading = false;
