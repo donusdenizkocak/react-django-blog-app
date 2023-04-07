@@ -28,21 +28,7 @@ const useBlogCall = ()=>{
             dispatch(fetchFail())
         }
     }
-    //detail
-    // const getBlogDetail = async(url)=>{
-    //     const controlUrl = url.includes('/')
-    //     dispatch(fetchStart())
-    //     try {
-    //         const {data} = await axiosWithToken(
-    //             `api/${url}/`
-    //         )           
-    //         //console.log("sss:"+controlUrl)
-    //         (controlUrl ? dispatch(getDetailSuccess({data})) : dispatch(getSuccess({data, url})))
-            
-    //     } catch (error) {
-    //         dispatch(fetchFail())
-    //     }
-    // }
+   
 
 
     return {getBlogData}

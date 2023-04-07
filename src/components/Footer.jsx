@@ -14,7 +14,7 @@ export const Footer = () => {
           bottom: 0,
           width: '100%',
           backgroundColor:'inherit'
-          }} component="footer" square variant="outlined">
+          }} component="footer" square >
             <Container maxWidth="lg">
               <Box
                 sx={{
