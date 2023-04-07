@@ -7,10 +7,10 @@ import LockIcon from "@mui/icons-material/Lock"
 import { Link } from "react-router-dom"
 import { Formik } from "formik"
 import useAuthCall from "../hooks/useAuthCall"
-import LoginForm  from "../components/LoginForm"
+import LoginForm , {loginScheme} from "../components/auth/LoginForm"
 
 const Login = () => {
-  //const { login } = useAuthCall()
+  const { login } = useAuthCall()
 
   return (
     <Container maxWidth="lg">
@@ -51,9 +51,9 @@ const Login = () => {
 
           <Formik
             initialValues={{ email: "", password: "" }}
-            // validationSchema={loginScheme}
+             validationSchema={loginScheme}
             onSubmit={(values, actions) => {
-              //login(values)
+              login(values)
               actions.resetForm()
               actions.setSubmitting(false)
             }}

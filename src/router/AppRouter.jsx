@@ -1,20 +1,26 @@
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Footer from '../components/Footer'
-import NavBar from '../components/NavBar'
-import Dashboard from '../pages/Dashboard'
-import Detail from '../pages/Detail'
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
+import NavBar from "../components/NavBar"
+import Dashboard from "../pages/Dashboard"
+import Footer from "../components/Footer"
+import About from "../pages/About"
+import NewBlog from "../pages/NewBlog"
+import Detail from "../pages/Detail"
+import Login from "../pages/Login"
 
- const AppRouter = () => {
+const AppRouter = () => {
   return (
-    <BrowserRouter>
-         <NavBar/>
+    <Router>
+        <NavBar />
         <Routes>
-            <Route path="/" element={<Dashboard/>} />
-            <Route path="/detail/:id" element={<Detail/>} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/new-blog" element={<NewBlog />} />
+            <Route path="/detail/:id" element={<Detail />} />
         </Routes>
-        <Footer/>
-    </BrowserRouter>
+        <Footer />
+    </Router>
   )
 }
+
 export default AppRouter

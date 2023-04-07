@@ -7,13 +7,13 @@ import { useNavigate } from "react-router-dom";
 
 const useAuthCall =() =>{
     const dispatch =useDispatch()
-    const naigate= useNavigate()
-    const BASE_URL = "http://32338.fullstack.clarusway.com/api/blogs/";
+    const navigate= useNavigate()
+    const BASE_URL = "http://32338.fullstack.clarusway.com/";
 
     const login = async(userInfo)=>{
         dispatch(fetchStart())
         try {
-            const {data} = await axios.post(`${BASE_URL}users/login/`,userInfo)
+            const {data} = await axios.post(`${BASE_URL}users/auth/login/`,userInfo)
             dispatch(loginSuccess(data))
             toastSuccessNotify("Login performed")
             navigate(-1)
@@ -37,7 +37,7 @@ const useAuthCall =() =>{
     }
 
     //register
-    const register = async()=>{
+    const register = async(userInfo)=>{
         dispatch(fetchStart())
     try {
         const {data} = await axios.post(`${BASE_URL}users/register/`,userInfo)
