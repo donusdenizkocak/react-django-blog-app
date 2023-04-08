@@ -30,7 +30,7 @@ const BlogCard = ({blog}) => {
       <CardMedia
         sx={{objectFit:"contain"}}
         component="img"
-        alt="green iguana"
+        alt={blog?.title}
         height="140"
         image={blog?.image}
       />
