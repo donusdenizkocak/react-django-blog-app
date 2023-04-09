@@ -21,6 +21,7 @@ reducers:{
        logoutSuccess: (state,{payload}) =>{
                 state.loading = false
                 state.currentUser= null
+                state.token=payload?.key
                 state.token= null
              },
          registerSuccess:(state,{payload})=>{

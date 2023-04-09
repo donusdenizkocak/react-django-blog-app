@@ -20,12 +20,12 @@ import { useEffect } from "react";
 
 const Detail = () => {
   const {id} = useParams()
-  const {getBlogData} = useBlogCall()
+  const {getDetailData} = useBlogCall()
   const {details} = useSelector((state)=>state.blog)
   console.log(details)
 
 useEffect(()=>{
-  getBlogData(`blogs/${id}`)
+  getDetailData(`blogs/${id}`)
 },[])
 
   return (

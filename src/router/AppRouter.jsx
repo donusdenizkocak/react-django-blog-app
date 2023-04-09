@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
+
 import NavBar from "../components/NavBar"
 import Dashboard from "../pages/Dashboard"
 import Footer from "../components/Footer"
@@ -7,10 +7,11 @@ import NewBlog from "../pages/NewBlog"
 import Detail from "../pages/Detail"
 import Login from "../pages/Login"
 import Register from "../pages/Register"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 const AppRouter = () => {
   return (
-    <Router>
+    <BrowserRouter>
         <NavBar />
         <Routes>
             <Route path="/" element={<Dashboard />} />
@@ -21,7 +22,7 @@ const AppRouter = () => {
             <Route path="/detail/:id" element={<Detail />} />
         </Routes>
         <Footer />
-    </Router>
+    </BrowserRouter>
   )
 }
 

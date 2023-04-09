@@ -26,7 +26,7 @@ const BlogCard = ({blog}) => {
   const navigate = useNavigate()
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 ,display:"flex",flexDirection:"column",justifyContent:"space-around",boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",height:500}}>
       <CardMedia
         sx={{objectFit:"contain"}}
         component="img"
@@ -42,7 +42,9 @@ const BlogCard = ({blog}) => {
           {blog?.content}
         </Typography>
         <Typography variant="body2" color="text.secondary" mt={2}>
-          {blog?.publish_date}
+        <Typography variant="body2" color="text.secondary" align="left" mt={2}>
+          {new Date(blog?.publish_date).toDateString()}
+        </Typography>
         </Typography>
 
         <Typography sx={{ display: "flex", alignItems: "center", mt: 2 }}>

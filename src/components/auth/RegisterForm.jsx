@@ -1,18 +1,8 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import { Form } from "formik";
-import { useState } from "react";
-import { object, string } from "yup";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import IconButton from "@mui/material/IconButton";
-import {
-  //FormControl,
-  InputAdornment,
- // InputLabel,
- // OutlinedInput,
-} from "@mui/material";
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import TextField from "@mui/material/TextField"
+import { Form } from "formik"
+import { object, string } from "yup"
 
 export const registerSchema = object({
   username: string()
@@ -32,14 +22,11 @@ export const registerSchema = object({
     .matches(/[a-z]/, "Password bir küçük harf içermelidir")
     .matches(/[A-Z]/, "Password bir büyük harf içermelidir")
     .matches(/[!,?{}><%&$#£+-.]+/, "Password bir özel karakter içermelidir"),
-});
+})
 
-const RegisterForm= ({ values, handleChange, errors, touched, handleBlur }) => {
-  const [togglePassword, setTogglePassword] = useState(false);
-
-  const togglePasswordHide = () => {
-    setTogglePassword(!togglePassword);
-  };
+const RegisterForm = (
+    { values, handleChange, errors, touched, handleBlur }
+    ) => {
   return (
     <div>
       <Form>
@@ -55,7 +42,30 @@ const RegisterForm= ({ values, handleChange, errors, touched, handleBlur }) => {
             onBlur={handleBlur}
             helperText={touched.username && errors.username}
             error={touched.username && Boolean(errors.username)}
-            required
+          />
+          <TextField
+            label="First Name"
+            name="first_name"
+            id="firstName"
+            type="text"
+            variant="outlined"
+            value={values.first_name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            helperText={touched.first_name && errors.first_name}
+            error={touched.first_name && Boolean(errors.first_name)}
+          />
+          <TextField
+            label="Last Name"
+            name="last_name"
+            id="last_name"
+            type="text"
+            variant="outlined"
+            value={values.last_name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            helperText={touched.last_name && errors.last_name}
+            error={touched.last_name && Boolean(errors.last_name)}
           />
           <TextField
             label="Email"
@@ -68,127 +78,45 @@ const RegisterForm= ({ values, handleChange, errors, touched, handleBlur }) => {
             onBlur={handleBlur}
             helperText={touched.email && errors.email}
             error={touched.email && Boolean(errors.email)}
-            required
           />
           <TextField
-            label="Image"
+            label="Image (url)"
             name="image"
             id="image"
             type="url"
             variant="outlined"
             value={values.image}
             onChange={handleChange}
-            onBlur={handleBlur}
-            helperText={touched.image && errors.image}
-            error={touched.image && Boolean(errors.image)}
           />
-
           <TextField
             label="Bio"
             name="bio"
             id="bio"
             type="text"
+            multiline
             variant="outlined"
             value={values.bio}
             onChange={handleChange}
-            onBlur={handleBlur}
-            helperText={touched.bio && errors.bio}
-            error={touched.bio && Boolean(errors.bio)}
           />
-
           <TextField
-            required
+            label="password"
             name="password"
-            label="Password"
-            type={togglePassword ? "text" : "password"}
             id="password"
-            onChange={handleChange}
+            type="password"
+            variant="outlined"
             value={values.password}
+            onChange={handleChange}
             onBlur={handleBlur}
             helperText={touched.password && errors.password}
             error={touched.password && Boolean(errors.password)}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton>
-                    {togglePassword ? (
-                      <Visibility
-                        className="cursor_pointer"
-                        onClick={togglePasswordHide}
-                      />
-                    ) : (
-                      <VisibilityOff onClick={togglePasswordHide} />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
           />
-
           <Button type="submit" variant="contained" size="large">
-            Sign Up
+            Submit
           </Button>
         </Box>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default RegisterForm;
-
-
-  /* <TextField
-label="password"
-name="password"
-id="password"
-type="password"
-variant="outlined"
-value={values.password}
-onChange={handleChange}
-onBlur={handleBlur}
-helperText={touched.password && errors.password}
-error={touched.password && Boolean(errors.password)}
-required
-/> */
-
-
-//   const [showPassword, setShowPassword] = useState(false);
-//   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-//   const handleMouseDownPassword = (event) => {
-//     event.preventDefault();
-//   };
-
-  /* <FormControl
-            variant="outlined"
-            required
-            name="password"
-            id="password"
-            type="password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            helperText={touched.password && errors.password}
-            error={touched.password && Boolean(errors.password)}
-          >
-            <InputLabel htmlFor="outlined-adornment-password">
-              Password
-            </InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-password"
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Password"
-            />
-          </FormControl> */
+export default RegisterForm

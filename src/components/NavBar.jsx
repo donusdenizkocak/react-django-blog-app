@@ -57,7 +57,7 @@ const settingsPublic = [
   
 ];
 
-function NavBar() {
+function NavBar ()  {
 
 
 
