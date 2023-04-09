@@ -53,9 +53,21 @@ const getDetailData = async(url) =>{
     }
 }
 
+//like
+
+const AddLike = async(url,id) =>{
+    dispatch(fetchStart())
+    try {
+      await axiosWithToken.post(`api/${url}`)
+      getBlogData("blogs")
+    } catch (error) {
+        
+    }
+}
+
 
     
 
-    return {getBlogData, postBlogData,getDetailData}
+    return {getBlogData, postBlogData,getDetailData,AddLike}
 }
 export default useBlogCall

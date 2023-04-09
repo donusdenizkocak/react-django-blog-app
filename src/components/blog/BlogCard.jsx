@@ -11,6 +11,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
+import useBlogCall from "../../hooks/useBlogCall";
+import { useSelector } from "react-redux";
 
 const butonStyle = {
   color: "white",
@@ -22,15 +24,32 @@ const butonStyle = {
 };
 
 const BlogCard = ({blog}) => {
-
   const navigate = useNavigate()
+  const {AddLike} = useBlogCall()
+  const {currentUser} = useSelector((state)=>state.auth)
+  //like function
+  const likeStatus = ()=>(
+    blog?.likes_n.filter((item)=>(
+      item.user_id === currentUser.id
+    ))[0] && "red"
+  )
+  console.log(likeStatus)
 
   return (
-    <Card sx={{ maxWidth: 345 ,display:"flex",flexDirection:"column",justifyContent:"space-around",boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",height:500}}>
+    <Card sx={{ 
+      maxWidth: 345,
+      display:"flex",
+      flexDirection:"column",
+      justifyContent:"space-around",
+      height:500,
+      m:3,
+      boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset" 
+
+      }}>
       <CardMedia
         sx={{objectFit:"contain"}}
         component="img"
-        alt={blog?.title}
+        alt="green iguana"
         height="140"
         image={blog?.image}
       />
@@ -41,10 +60,8 @@ const BlogCard = ({blog}) => {
         <Typography variant="body2" color="text.secondary" align="justify">
           {blog?.content}
         </Typography>
-        <Typography variant="body2" color="text.secondary" mt={2}>
-        <Typography variant="body2" color="text.secondary" align="left" mt={2}>
+        <Typography variant="body2" color="text.primary" align="left" mt={2}>
           {new Date(blog?.publish_date).toDateString()}
-        </Typography>
         </Typography>
 
         <Typography sx={{ display: "flex", alignItems: "center", mt: 2 }}>
@@ -66,8 +83,10 @@ const BlogCard = ({blog}) => {
         }}
       >
         <Typography sx={{ display: "flex", alignItems: "center" }}>
-          <IconButton color="secondary">
-            <FavoriteIcon />
+          <IconButton color="secondary" onClick={()=>AddLike(`likes/${blog.id}`)}>
+            <FavoriteIcon sx={{
+              color:likeStatus
+            }} />
             <span>{blog?.likes}</span>
           </IconButton>
           <IconButton>
