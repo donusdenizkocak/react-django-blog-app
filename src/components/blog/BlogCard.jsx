@@ -29,9 +29,10 @@ const BlogCard = ({blog}) => {
   const {currentUser} = useSelector((state)=>state.auth)
   //like function
   const likeStatus = ()=>(
+    currentUser &&(
     blog?.likes_n.filter((item)=>(
       item.user_id === currentUser.id
-    ))[0] && "red"
+    ))[0] && "red")
   )
   console.log(likeStatus)
 

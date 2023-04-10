@@ -55,7 +55,7 @@ const getDetailData = async(url) =>{
 
 //like
 
-const AddLike = async(url,id) =>{
+const AddLike = async(url) =>{
     dispatch(fetchStart())
     try {
       await axiosWithToken.post(`api/${url}`)

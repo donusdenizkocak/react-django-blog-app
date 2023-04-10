@@ -5,6 +5,7 @@ Box,
   CardActions,
   CardContent,
   CardMedia,
+  Divider,
   Grid,
   IconButton,
   Typography
@@ -16,9 +17,10 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useParams } from "react-router-dom";
 import useBlogCall from "../hooks/useBlogCall";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Detail = () => {
+  const [commendCard, setCommendCard] = useState("")
   const {id} = useParams()
   const {getDetailData} = useBlogCall()
   const {details} = useSelector((state)=>state.blog)
@@ -78,8 +80,8 @@ useEffect(()=>{
                     {details.likes}
                   </Typography>
               </IconButton>
-
-              <IconButton>
+              {/* ------------ comment button------------- --------------------------*/}
+              <IconButton  onClick={()=> setCommendCard(!commendCard)}>
                   <CommentIcon />
                   <span>
                     {details.comment_count}
@@ -92,9 +94,27 @@ useEffect(()=>{
                     {details.post_views}
                   </span>
               </IconButton>
-
               </CardActions>
 
+           {/* commend card  --------------- */}
+           {commendCard &&
+                   <Box width="100%" mt={3} p={3}>
+                    {details?.comments?.map((item, index)=>(
+                          <Box key={index} p={2}>
+                          <Typography>
+                            {item.user}
+                          </Typography>
+                          <Typography color="#aaa">
+                            {new Date(item.time_stamp).toDateString()}
+                          </Typography>
+                          <Typography>
+                            {item.content}
+                          </Typography>
+                          <Divider />
+                          </Box>
+                          ))}
+                      </Box>       
+                    }
           </Card>
         </Grid>
       </Grid>

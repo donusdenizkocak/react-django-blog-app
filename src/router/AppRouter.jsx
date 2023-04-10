@@ -8,6 +8,7 @@ import Detail from "../pages/Detail"
 import Login from "../pages/Login"
 import Register from "../pages/Register"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { PrivateRouter } from "./PrivateRouter"
 
 const AppRouter = () => {
   return (
@@ -18,8 +19,10 @@ const AppRouter = () => {
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/new-blog" element={<NewBlog />} />
-            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="" element={<PrivateRouter/>}>
+                    <Route path="/new-blog" element={<NewBlog />} />
+                    <Route path="/detail/:id" element={<Detail />} />
+            </Route>
         </Routes>
         <Footer />
     </BrowserRouter>
