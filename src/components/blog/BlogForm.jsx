@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useBlogCall from "../../hooks/useBlogCall";
 import { useSelector } from "react-redux";
 

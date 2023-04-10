@@ -34,7 +34,7 @@ const BlogCard = ({blog}) => {
       item.user_id === currentUser.id
     ))[0] && "red")
   )
-  console.log(likeStatus)
+ 
 
   return (
     <Card sx={{ 

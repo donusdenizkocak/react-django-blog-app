@@ -10,10 +10,11 @@ export const Footer = () => {
         return (
           <Paper sx={{marginTop: 'calc(10% + 60px)',
           width: '100%',
-          position: 'fixed',
           bottom: 0,
+          color:"inherit",
           width: '100%',
-          backgroundColor:'inherit'
+          backgroundColor:'inherit',
+          marginTop:"50px"
           }} component="footer" square >
             <Container maxWidth="lg">
               <Box

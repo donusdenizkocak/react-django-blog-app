@@ -1,6 +1,5 @@
-
 import {
-Box,
+  Box,
   Card,
   CardActions,
   CardContent,
@@ -8,7 +7,7 @@ Box,
   Divider,
   Grid,
   IconButton,
-  Typography
+  Typography,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite"
@@ -18,13 +17,14 @@ import { useParams } from "react-router-dom";
 import useBlogCall from "../hooks/useBlogCall";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import CommentForm from "../components/blog/CommentForm";
 
 const Detail = () => {
-  const [commendCard, setCommendCard] = useState("")
+  const [commentCard, setCommentCard] = useState(false)
   const {id} = useParams()
   const {getDetailData} = useBlogCall()
   const {details} = useSelector((state)=>state.blog)
-  console.log(details)
+  //console.log(details)
 
 useEffect(()=>{
   getDetailData(`blogs/${id}`)
@@ -80,8 +80,9 @@ useEffect(()=>{
                     {details.likes}
                   </Typography>
               </IconButton>
-              {/* ------------ comment button------------- --------------------------*/}
-              <IconButton  onClick={()=> setCommendCard(!commendCard)}>
+
+              {/* comment button ----------------  */}
+              <IconButton onClick={()=>setCommentCard(!commentCard)}>
                   <CommentIcon />
                   <span>
                     {details.comment_count}
@@ -96,8 +97,8 @@ useEffect(()=>{
               </IconButton>
               </CardActions>
 
-           {/* commend card  --------------- */}
-           {commendCard &&
+              {/* comment card ------------------   */}
+              {commentCard &&
                    <Box width="100%" mt={3} p={3}>
                     {details?.comments?.map((item, index)=>(
                           <Box key={index} p={2}>
@@ -107,14 +108,18 @@ useEffect(()=>{
                           <Typography color="#aaa">
                             {new Date(item.time_stamp).toDateString()}
                           </Typography>
-                          <Typography>
+                          <Typography mb={2}>
                             {item.content}
                           </Typography>
                           <Divider />
-                          </Box>
-                          ))}
-                      </Box>       
-                    }
+                      </Box>
+                    ))}   
+
+                    <CommentForm postId={details.id} />                
+               </Box>
+              }
+             
+
           </Card>
         </Grid>
       </Grid>
