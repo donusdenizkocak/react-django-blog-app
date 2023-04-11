@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardActions,
   CardContent,
@@ -18,13 +19,24 @@ import useBlogCall from "../hooks/useBlogCall";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import CommentForm from "../components/blog/CommentForm";
+import DeleteModal from "../components/blog/DeleteModal";
+import UpdateModal from "../components/blog/UpdateModal";
 
 const Detail = () => {
   const [commentCard, setCommentCard] = useState(false)
+  const {currentUser} = useSelector((state)=>state.auth)
   const {id} = useParams()
   const {getDetailData} = useBlogCall()
   const {details} = useSelector((state)=>state.blog)
   //console.log(details)
+  //modal delete states
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  //update modal
+  const [update, setUpdate] = useState(false);
+  const updateOpen = () => setUpdate(true);
+  const updateClose = () => setUpdate(false);
 
 useEffect(()=>{
   getDetailData(`blogs/${id}`)
@@ -40,7 +52,7 @@ useEffect(()=>{
         }}
       >
         <Grid item>
-          <Card sx={{ maxWidth: 600 }}>
+          <Card sx={{ maxWidth: 600, p:3 }}>
             <CardMedia
               sx={{
                 objectFit: "contain",
@@ -60,7 +72,7 @@ useEffect(()=>{
                     {details?.author}
                   </Typography>
                   <Typography sx={{ fontSize: "0.9rem", color: "#555" }}>
-                    {details.publish_date}
+                    {new Date(details.publish_date).toDateString()}
                   </Typography>
                 </Box>
               </Box>
@@ -118,8 +130,40 @@ useEffect(()=>{
                     <CommentForm postId={details.id} />                
                </Box>
               }
-             
 
+              {/* delete update button ---------------- */}
+             {(details.author === currentUser.username) &&
+                    <CardActions>
+                    <Button variant="contained" sx={{backgroundColor:"green"}}  
+                    onClick={updateOpen}>
+                        UPDATE BLOG
+                    </Button>
+
+                    <Button variant="contained" 
+                    sx={{backgroundColor:"red"}}
+                    onClick={handleOpen}
+                    >
+                        DELETE BLOG
+                    </Button>
+
+
+                    <DeleteModal 
+                    handleOpen={handleOpen} 
+                    handleClose={handleClose} 
+                    open={open}
+                    id={id}
+                     />
+
+                  <UpdateModal 
+                    updateOpen={updateOpen} 
+                    updateClose={updateClose} 
+                    update={update}
+                    id={id}
+                     />
+                    
+                </CardActions>
+             }
+              
           </Card>
         </Grid>
       </Grid>

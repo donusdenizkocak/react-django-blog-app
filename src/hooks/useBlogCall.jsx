@@ -7,23 +7,19 @@ import {
 } from "../features/blogSlice"
 import useAxios from "./useAxios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify"
-
+import { useNavigate } from "react-router-dom";
 const useBlogCall = ()=>{
     const dispatch = useDispatch()
-
     const {axiosWithToken, axiosPublic} = useAxios()
-
     //Get Blogs
     const getBlogData = async(url)=>{
-       
         dispatch(fetchStart())
         try {
             const {data} = await axiosPublic(
                 `api/${url}/`
-            )                   
+            )
            dispatch(getSuccess({data, url}))
            //url.includes('/') && dispatch(getDetailSuccess({data}))
-            
         } catch (error) {
             dispatch(fetchFail())
         }
@@ -60,7 +56,6 @@ const useBlogCall = ()=>{
             await axiosWithToken.post(`api/${url}/`)
             getBlogData("blogs")
         } catch (error) {
-          console.log(error)  
         }
     }
     //
@@ -76,7 +71,24 @@ const useBlogCall = ()=>{
             toastErrorNotify("Comment can not be added")
         }
     }
-
-    return {getBlogData, postBlogData,getDetailData,AddLike,addComment}
+    //
+    //delete blog
+    const navigate = useNavigate()
+    const deleteBlog = async (url)=>{
+        // console.log(url)
+        try {
+            await axiosWithToken.delete(`api/${url}`)
+            navigate("/")
+            toastSuccessNotify("Blog successfuly deleted")
+        } catch (error) {
+            dispatch(fetchFail())
+            toastErrorNotify(error.message)
+        }
+    }
+    //
+    //edit blog
+    const putBlogData = async (url,id,info)=>{
+    }
+    return {getBlogData, postBlogData,getDetailData,AddLike,addComment,deleteBlog,putBlogData}
 }
 export default useBlogCall
