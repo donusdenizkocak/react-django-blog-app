@@ -169,7 +169,6 @@ useEffect(()=>{
                     update={update}
                     id={id}
                     info={info}
-                    setInfo={setInfo}
                      />
                     
                 </CardActions>
